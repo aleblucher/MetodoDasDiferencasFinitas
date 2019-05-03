@@ -4,8 +4,8 @@ def solve(k0, t_atras, t_frente, t_atual):
     return k0*(t_atras - 2*t_atual + t_frente) + t_atual
 
 # Específico para a matriz do exercício
-def build_matrix(nx, ny):
-    empty_matrix = np.zeros((nx,ny))
+def build_matrix(ny, nx):
+    empty_matrix = np.zeros((nx, ny))
     for i in range (nx):
         for j in range (ny):
             if (j == 0 or j == (ny-1)):
@@ -16,17 +16,16 @@ def build_matrix(nx, ny):
                 empty_matrix[i][j]= -1
     return empty_matrix
 
-def solve_matrix(matrix, nx, ny, k0):
+def solve_matrix(matrix, ny, nx, k0):
     for i in range (nx):
         for j in range (ny):
             if (matrix[i][j] == -1):
-                matrix[i][j] = k0 * (matrix[i-1][j +1] - 2 * matrix[i-1][j] + matrix[i-1][j+1]) + matrix[i-1][j]
-                #print(matrix[i][j])
+                matrix[i][j] = k0 * (matrix[i-1][j+1] - 2 * matrix[i-1][j] + matrix[i-1][j-1]) + matrix[i-1][j]
     return matrix
 
 
 
-full_matrix = build_matrix(100, 10) # para 50 cm e 500 segundos
+full_matrix = build_matrix(10, 100) # para 50 cm e 500 segundos
 #print(full_matrix)
-right_matrix = solve_matrix(full_matrix, 100, 10, 0.2)
+right_matrix = solve_matrix(full_matrix, 10, 100, 0.2)
 print(right_matrix)
